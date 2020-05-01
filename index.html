@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>App</title>
+    <title>expense-tracker</title>
     <!--Import Google Icon Font-->
     <link
       href="https://fonts.googleapis.com/icon?family=Material+Icons"
@@ -17,7 +17,7 @@
   </head>
   <body class="teal lighten-5">
     <header class="teal darken-5 section">
-      <h2 class="center white-text">ValHalla</h2>
+      <h2 class="center white-text">Budget Planner</h2>
       <p class="grey-text text-lighten-2 center flow-text">
         Graphical expenses tracker for noobs...
       </p>
@@ -47,7 +47,7 @@
                 </button>
               </div>
               <div class="input-field center">
-                <p class="red-text" id="error">err!</p>
+                <p class="red-text" id="error"></p>
               </div>
             </div>
           </form>
@@ -82,12 +82,15 @@
       firebase.initializeApp(firebaseConfig);
       firebase.analytics();
       const db = firebase.firestore();
-      const settings = { timestampsInSnapshots: true };
-      db.settings(settings);
     </script>
     <script src="https://d3js.org/d3.v5.min.js"></script>
     <!-- Compiled and minified JavaScript -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script
+      src="https://code.jquery.com/jquery-3.5.0.min.js"
+      integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ="
+      crossorigin="anonymous"
+    ></script>
     <script src="app.js"></script>
     <script src="graph.js"></script>
   </body>
