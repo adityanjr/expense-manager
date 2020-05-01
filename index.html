@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>App</title>
+    <!--Import Google Icon Font-->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+    <!-- Compiled and minified CSS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css"
+    />
+  </head>
+  <body class="teal lighten-5">
+    <header class="teal darken-5 section">
+      <h2 class="center white-text">ValHalla</h2>
+      <p class="grey-text text-lighten-2 center flow-text">
+        Graphical expenses tracker for noobs...
+      </p>
+    </header>
+    <div class="container section">
+      <div class="row">
+        <div class="col s12 m6">
+          <form class="card z-depth-4">
+            <div class="card-content">
+              <span class="card-title teal-text">Add here: </span>
+              <div class="input-field">
+                <input type="text" id="name" />
+                <label for="name">Item Name</label>
+              </div>
+              <div class="input-field">
+                <input type="text" id="cost" />
+                <label for="name">Cost (₹)</label>
+              </div>
+              <div class="input-field center">
+                <button
+                  class="btn amber darken-3 white-text waves-effect waves-light"
+                  type="submit"
+                  name="action"
+                >
+                  Add
+                  <i class="material-icons right">send</i>
+                </button>
+              </div>
+              <div class="input-field center">
+                <p class="red-text" id="error">err!</p>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="col s12 m5 push-m1">
+          <div class="canvas"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- The core Firebase JS SDK is always required and must be listed first -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-firestore.js"></script>
+
+    <!-- TODO: Add SDKs for Firebase products that you want to use
+     https://firebase.google.com/docs/web/setup#available-libraries -->
+    <script src="https://www.gstatic.com/firebasejs/7.14.2/firebase-analytics.js"></script>
+
+    <script>
+      // Your web app's Firebase configuration
+      var firebaseConfig = {
+        apiKey: "AIzaSyCCs6rDsYMmbjGNDPVVKzpJb82kibxMFwg",
+        authDomain: "d3-firebase-99b54.firebaseapp.com",
+        databaseURL: "https://d3-firebase-99b54.firebaseio.com",
+        projectId: "d3-firebase-99b54",
+        storageBucket: "d3-firebase-99b54.appspot.com",
+        messagingSenderId: "470619365705",
+        appId: "1:470619365705:web:2d9522cfd7981dc2c9fa98",
+        measurementId: "G-SPSCPCDRDN",
+      };
+      // Initialize Firebase
+      firebase.initializeApp(firebaseConfig);
+      firebase.analytics();
+    </script>
+    <script src="https://d3js.org/d3.v5.min.js"></script>
+    <!-- Compiled and minified JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script src="app.js"></script>
+    <script src="graph.js"></script>
+  </body>
+</html>
