@@ -1,8 +1,9 @@
-const form = $("form");
-const name = $("#name");
-const cost = $("#cost");
-const error = $("#error");
-form.submit((e) => {
+const form = document.querySelector("form");
+const name = document.querySelector("#name");
+const cost = document.querySelector("#cost");
+const error = document.querySelector("#error");
+
+form.addEventListener("submit", (e) => {
   e.preventDefault();
 
   if (name.value && cost.value) {
@@ -10,7 +11,7 @@ form.submit((e) => {
       name: name.value,
       cost: parseInt(cost.value),
     };
-    console.log("wahtasfka");
+
     db.collection("expenses")
       .add(item)
       .then((res) => {
@@ -19,6 +20,6 @@ form.submit((e) => {
         cost.value = "";
       });
   } else {
-    error.textContent = "Enter both Values !!";
+    error.textContent = "Enter Both Values !!";
   }
 });
