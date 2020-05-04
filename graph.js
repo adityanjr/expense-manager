@@ -27,6 +27,10 @@ const update = (data) => {
   color.domain(data.map((d) => d.name));
   const paths = graph.selectAll("path").data(pie(data));
 
+  paths.exit().remove(); //handle exit selection
+
+  paths.attr("d", arcPath); //handle DOM path updates
+
   paths
     .enter()
     .append("path")
