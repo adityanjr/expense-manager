@@ -27,9 +27,15 @@ const update = (data) => {
   color.domain(data.map((d) => d.name));
   const paths = graph.selectAll("path").data(pie(data));
 
-  paths.exit().remove(); //handle exit selection
+  //handle exit selection
+  paths.exit().transition().duration(750).attrTween("d", arcTweenExit).remove();
 
-  paths.attr("d", arcPath); //handle DOM path updates
+  //handle DOM path updates
+  paths
+    .attr("d", arcPath)
+    .transition()
+    .duration(750)
+    .attrTween("d", arcTweenUpdate);
 
   paths
     .enter()
@@ -38,6 +44,9 @@ const update = (data) => {
     .attr("stroke", "#fff")
     .attr("stroke-width", 3)
     .attr("fill", (d) => color(d.data.name))
+    .each(function (d) {
+      this._current = d;
+    })
     .transition()
     .duration(750)
     .attrTween("d", arcTweenEnter);
@@ -74,3 +83,19 @@ const arcTweenEnter = (d) => {
     return arcPath(d);
   };
 };
+
+const arcTweenExit = (d) => {
+  var i = d3.interpolate(d.startAngle, d.endAngle);
+  return function (t) {
+    d.startAngle = i(t);
+    return arcPath(d);
+  };
+};
+
+function arcTweenUpdate(d) {
+  var i = d3.interpolate(this._current, d);
+  this._current = d;
+  return function (t) {
+    return arcPath(i(t));
+  };
+}
