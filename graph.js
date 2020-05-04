@@ -20,3 +20,29 @@ const arcPath = d3
   .arc()
   .outerRadius(dimension.radius)
   .innerRadius(dimension.radius / 2);
+
+const update = (data) => {};
+
+var data = [];
+
+db.collection("expenses").onSnapshot((res) => {
+  res.docChanges().forEach((change) => {
+    const doc = { ...change.doc.data(), id: change.doc.id };
+
+    switch (change.type) {
+      case "added":
+        data.push(doc);
+        break;
+      case "modified":
+        const index = datafindIndex((item) => item.id == doc.id);
+        data[index] = doc;
+        break;
+      case "removed":
+        data = data.filter((item) => item.id !== doc.id);
+        break;
+      default:
+        break;
+    }
+  });
+  update(data);
+});
