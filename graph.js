@@ -13,7 +13,7 @@ const graph = svg
 
 const pie = d3
   .pie()
-  .sort(NULL)
+  .sort(null)
   .value((d) => d.cost);
 
 const arcPath = d3
@@ -21,13 +21,20 @@ const arcPath = d3
   .outerRadius(dimension.radius)
   .innerRadius(dimension.radius / 2);
 
-const update = (data) => {
-  const paths = graph.selectAll('path')
-  .data(pie(data));
+const color = d3.scaleOrdinal(d3["schemeSet2"]);
 
-  paths.enter().append('path').attr('class', 'arc')
-  .attr('d', arcPath).attr('stroke', #fff)
-  .attr('stroke-width', 3)
+const update = (data) => {
+  color.domain(data.map((d) => d.name));
+  const paths = graph.selectAll("path").data(pie(data));
+
+  paths
+    .enter()
+    .append("path")
+    .attr("class", "arc")
+    .attr("d", arcPath)
+    .attr("stroke", "#fff")
+    .attr("stroke-width", 3)
+    .attr("fill", (d) => color(d.data.name));
 };
 
 var data = [];
