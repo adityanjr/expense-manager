@@ -23,8 +23,18 @@ const arcPath = d3
 
 const color = d3.scaleOrdinal(d3["schemeSet2"]);
 
+const legendGroup = svg
+  .append("g")
+  .attr("transform", `translate(${dimension.width + 50}, 20)`);
+
+const legend = d3.legendColor().shapePadding(10).shape("circle").scale(color);
+
 const update = (data) => {
   color.domain(data.map((d) => d.name));
+
+  legendGroup.call(legend);
+  legendGroup.selectAll("text").attr("fill", "black");
+
   const paths = graph.selectAll("path").data(pie(data));
 
   //handle exit selection
