@@ -6,7 +6,9 @@ const error = document.querySelector("#error");
 form.addEventListener("submit", (e) => {
   e.preventDefault();
 
-  if (name.value && cost.value) {
+  if (isNaN(cost.value)) {
+    error.textContent = "Cost should be a number !!";
+  } else if (name.value && cost.value) {
     const item = {
       name: name.value,
       cost: parseInt(cost.value),
