@@ -38,13 +38,13 @@ const update = (data) => {
   const paths = graph.selectAll("path").data(pie(data));
 
   //handle exit selection
-  paths.exit().transition().duration(750).attrTween("d", arcTweenExit).remove();
+  paths.exit().transition().duration(400).attrTween("d", arcTweenExit).remove();
 
   //handle DOM path updates
   paths
     .attr("d", arcPath)
     .transition()
-    .duration(750)
+    .duration(400)
     .attrTween("d", arcTweenUpdate);
 
   paths
@@ -58,8 +58,13 @@ const update = (data) => {
       this._current = d;
     })
     .transition()
-    .duration(750)
+    .duration(400)
     .attrTween("d", arcTweenEnter);
+
+  graph
+    .selectAll("path")
+    .on("mouseover", handleMouseOver)
+    .on("mouseout", handleMouseOut);
 };
 
 var data = [];
@@ -109,3 +114,15 @@ function arcTweenUpdate(d) {
     return arcPath(i(t));
   };
 }
+
+const handleMouseOver = (d, i, n) => {
+  //name transitions so that they dont interfere..
+  d3.select(n[i]).transition("fillSlice").duration(100).attr("fill", "#fff");
+};
+
+const handleMouseOut = (d, i, n) => {
+  d3.select(n[i])
+    .transition("fillSlice")
+    .duration(100)
+    .attr("fill", color(d.data.name));
+};
